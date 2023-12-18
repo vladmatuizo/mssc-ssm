@@ -25,17 +25,13 @@ class StateMachineConfigTest {
 
         stateMachine.start();
 
-        System.out.println(stateMachine.getState().toString());
         assertEquals(stateMachine.getState().getId(), PaymentState.NEW);
 
         stateMachine.sendEvent(PaymentEvent.PRE_AUTHORIZE);
 
-        System.out.println(stateMachine.getState().toString());
         assertEquals(stateMachine.getState().getId(), PaymentState.NEW);
 
         stateMachine.sendEvent(PaymentEvent.PRE_AUTH_APPROVED);
-
-        System.out.println(stateMachine.getState().toString());
 
         assertEquals(stateMachine.getState().getId(), PaymentState.PRE_AUTH);
     }
