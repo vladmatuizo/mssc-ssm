@@ -46,14 +46,6 @@ public class DefaultPaymentService implements PaymentService {
         return stateMachine;
     }
 
-    @Override
-    public StateMachine<PaymentState, PaymentEvent> declineAuthorization(Long paymentId) {
-        StateMachine<PaymentState, PaymentEvent> stateMachine = restoreStateMachineFromDb(paymentId);
-
-        sendEvent(paymentId, stateMachine, PaymentEvent.AUTH_DECLINED);
-        return stateMachine;
-    }
-
     private void sendEvent(Long paymentId, StateMachine<PaymentState, PaymentEvent> stateMachine, PaymentEvent event) {
         Message<PaymentEvent> message = MessageBuilder
                 .withPayload(event)
